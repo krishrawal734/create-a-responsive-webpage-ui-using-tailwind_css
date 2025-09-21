@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+
+    <!--navbar-->
+
+
+    <nav class="bg-dark dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 ">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">VERSION.IO</span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+                <button type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get
+                    started</button>
+                <button data-collapse-toggle="navbar-sticky" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-sticky" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium gap-5 md:flex-row  ">
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 text-white">Home</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class=" block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--hero section crousel-->
+
+    <style>
+        .hero-slide {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-content {
+            transition: all 0.6s ease 0.3s;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <body>
+        <div x-data="heroSlider()" class="relative overflow-hidden" @mouseenter="autoplay = false"
+            @mouseleave="autoplay = true">
+            <div class="relative h-[80vh] min-h-[500px]">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <div x-show="currentSlide === index" x-transition.opacity.duration.800ms class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gray-800">
+                            <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover opacity-80"
+                                @error="replaceBrokenImage($event)" loading="lazy">
+                        </div>
+
+                        <div class="container mx-auto px-6 h-full flex items-center">
+                            <div class="max-w-2xl text-white slide-content" :class="{
+                                'translate-x-0 opacity-100': currentSlide === index,
+                                'translate-x-10 opacity-0': currentSlide !== index
+                            }">
+                                <h2 x-text="" class="text-4xl md:text-5xl font-bold mb-4">Data To Inrich Your Online
+                                    Example</h2>
+                                <p x-text="" class="text-xl md:text-2xl mb-8">Anim aute id magna aliqua ad ad non
+                                    deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
+                                    occaecat.</p>
+                                <a :href=""
+                                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors fade-in"
+                                    x-text="">More Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <button @click="prev()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center z-10 transition-all"
+                    aria-label="Previous slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button @click="next()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center z-10 transition-all"
+                    aria-label="Next slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:h-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <button @click="goTo(index)" class="w-2 h-2 md:w-3 md:h-3 rounded-full transition-all" :class="{
+                            'bg-white w-4 md:w-6': currentSlide === index,
+                            'bg-white/50': currentSlide !== index
+                        }" :aria-label="`Go to slide ${index + 1}`"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function heroSlider() {
+                return {
+                    currentSlide: 0,
+                    autoplay: true,
+                    interval: null,
+                    slides: [
+                        {
+                            title: "Objavte nové obzory",
+                            description: "Cestovateľské zážitky, ktoré vám zmenia život",
+                            buttonText: "Rezervovať",
+                            buttonUrl: "#",
+                            image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+                        },
+                        {
+                            title: "Prírodné krásy",
+                            description: "Nádherné výhľady a čistá príroda",
+                            buttonText: "Pozrieť ponuku",
+                            buttonUrl: "#",
+                            image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+                        },
+                        {
+                            title: "Mestské dobrodružstvo",
+                            description: "Moderné mestá plné života a kultúry",
+                            buttonText: "Viac informácií",
+                            buttonUrl: "#",
+                            image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+                        }
+                    ],
+                    init() {
+                        this.startAutoplay();
+                    },
+                    next() {
+                        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                    },
+                    prev() {
+                        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                    },
+                    goTo(index) {
+                        this.currentSlide = index;
+                    },
+                    startAutoplay() {
+                        this.interval = setInterval(() => {
+                            if (this.autoplay) {
+                                this.next();
+                            }
+                        }, 5000);
+                    },
+                    replaceBrokenImage(event) {
+                        // Fallback obrázky z iného zdroja
+                        const fallbacks = [
+                            'https://picsum.photos/id/1018/1920/1080',
+                            'https://picsum.photos/id/1015/1920/1080',
+                            'https://picsum.photos/id/1019/1920/1080'
+                        ];
+                        event.target.src = fallbacks[this.currentSlide % fallbacks.length];
+                    }
+                }
+            }
+        </script>
+
+
+        <!--about section-->
+
+        <section class="text-center py-12 px-4 container mx-auto">
+            <h2 class="text-2xl font-bold">Mission And Values</h2>
+            <p class="mt-4 text-gray-700 max-w-2xl mx-auto">
+                Our mission is to provide exceptional healthcare services with a focus on availability, reliability, and
+                support.
+            </p>
+            <div class="flex justify-center space-x-8 mt-8 animate-fadeIn">
+                <div class="transition transform hover:scale-110">
+                    <h3 class="text-xl font-bold text-blue-800">25+</h3>
+                    <p class="text-gray-700">Specialists</p>
+                </div>
+                <div class="transition transform hover:scale-110">
+                    <h3 class="text-xl font-bold text-blue-800">50+</h3>
+                    <p class="text-gray-700">Years of Experience</p>
+                </div>
+                <div class="transition transform hover:scale-110">
+                    <h3 class="text-xl font-bold text-blue-800">100+</h3>
+                    <p class="text-gray-700">Config Management</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!--about us section 2-->
+        <section class="bg-gray-100 container mx-auto">
+            <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                    <div class="max-w-lg">
+                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">About Us</h2>
+                        <p class="mt-4 text-gray-600 text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed quis
+                            eros at lacus feugiat hendrerit sed ut tortor. Suspendisse et magna quis elit efficitur
+                            consequat.
+                            Mauris eleifend velit a pretium iaculis. Donec sagittis velit et magna euismod, vel aliquet
+                            nulla
+                            malesuada. Nunc pharetra massa lectus, a fermentum arcu volutpat vel.</p>
+                        <div class="mt-8">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-medium">Learn more about us
+                                <span class="ml-2">&#8594;</span></a>
+                        </div>
+                    </div>
+                    <div class="mt-12 md:mt-0">
+                        <img src="https://images.unsplash.com/photo-1626276727721-e5fb4a008389?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8"
+                            alt="About Us Image" class="object-cover rounded-lg shadow-md">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+                    <div class="mt-12 md:mt-0">
+                        <img src="https://images.unsplash.com/photo-1619597455322-4fbbd820250a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZGVza3RvcHxlbnwwfHwwfHx8MA%3D%3D"
+                            alt="About Us Image" class="object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="max-w-lg">
+                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get More Information</h2>
+                        <p class="mt-4 text-gray-600 text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed quis
+                            eros at lacus feugiat hendrerit sed ut tortor. Suspendisse et magna quis elit efficitur
+                            consequat.
+                            Mauris eleifend velit a pretium iaculis. Donec sagittis velit et magna euismod, vel aliquet
+                            nulla
+                            malesuada. Nunc pharetra massa lectus, a fermentum arcu volutpat vel.</p>
+                        <div class="mt-8">
+                            <a href="#" class="text-blue-500 hover:text-blue-600 font-medium">Learn more about us
+                                <span class="ml-2">&#8594;</span></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--service section-->
+        <section class="py-12 sm:py-12 lg:py-16 container mx-auto">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="max-w-xl mx-auto text-center xl:max-w-2xl">
+                    <h2 class="text-3xl font-bold leading-tight text-dark sm:text-4xl xl:text-5xl mb-6">We are just
+                        getting started!</h2>
+                    <p class="mb-4">We are creating a tool that helps you be more productive and efficient when building
+                        websites and webapps</p>
+
+                </div>
+                <div
+                    class="grid max-w-4xl lg:max-w-6xl grid-cols-1 mx-auto mt-8 text-center gap-y-4 sm:gap-x-8 sm:grid-cols-2 lg:grid-cols-3 sm:mt-12 lg:mt-20 sm:text-left">
+                    <div class="relative">
+                        <div class="absolute -inset-1">
+                            <div
+                                class="w-full h-full rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-yellow-400 via-pink-500 to-green-600">
+                            </div>
+                        </div>
+                        <div class="relative overflow-hidden bg-white shadow-md rounded-xl h-full">
+                            <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 8L20 8" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <path d="M4 16L14 16" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <ellipse cx="7" cy="8" rx="3" ry="3" transform="rotate(90 7 8)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                    <ellipse cx="17" cy="16" rx="3" ry="3" transform="rotate(90 17 16)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                </svg>
+                                <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Realtime Collaboration</h3>
+                                <p class="mt-6 text-base text-gray-600">Collaborate in realtime with other editors in a
+                                    project. See what othe editors are doing and edit even a simple text together</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-white shadow-md rounded-xl">
+                        <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="13" y="14" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <rect x="7" y="11" width="2" height="6" rx="1" fill="#111827"></rect>
+                                <rect x="11" y="13" width="2" height="6" rx="1" transform="rotate(90 11 13)"
+                                    fill="#111827">
+                                </rect>
+                                <rect x="16" y="12" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <path
+                                    d="M14 8V8C14 7.58326 14 7.37488 13.9655 7.19144C13.8455 6.5546 13.4245 6.01534 12.8358 5.74455C12.6662 5.66654 12.464 5.616 12.0597 5.51493L12 5.5C11.5388 5.3847 11.3082 5.32706 11.1171 5.233C10.5686 4.96315 10.1737 4.45731 10.0449 3.85979C10 3.65151 10 3.41382 10 2.93845V2"
+                                    stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
+                                <path
+                                    d="M3 14C3 11.4412 3 10.1618 3.61994 9.28042C3.77954 9.05351 3.96572 8.85041 4.17372 8.6763C4.98164 8 6.15442 8 8.5 8H15.5C17.8456 8 19.0184 8 19.8263 8.6763C20.0343 8.85041 20.2205 9.05351 20.3801 9.28042C21 10.1618 21 11.4412 21 14C21 16.5588 21 17.8382 20.3801 18.7196C20.2205 18.9465 20.0343 19.1496 19.8263 19.3237C19.0184 20 17.8456 20 15.5 20H8.5C6.15442 20 4.98164 20 4.17372 19.3237C3.96572 19.1496 3.77954 18.9465 3.61994 18.7196C3 17.8382 3 16.5588 3 14Z"
+                                    stroke="#111827" stroke-width="2"></path>
+                            </svg>
+                            <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">History of Edits</h3>
+                            <p class="mt-6 text-base text-gray-600">Go back and forth your history of changes and
+                                restore your designs to any point in time</p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-1">
+                            <div
+                                class="w-full h-full rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-yellow-400 via-pink-500 to-green-600">
+                            </div>
+                        </div>
+                        <div class="relative overflow-hidden bg-white shadow-md rounded-xl h-full">
+                            <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 8L20 8" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <path d="M4 16L14 16" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <ellipse cx="7" cy="8" rx="3" ry="3" transform="rotate(90 7 8)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                    <ellipse cx="17" cy="16" rx="3" ry="3" transform="rotate(90 17 16)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                </svg>
+                                <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Integrations</h3>
+                                <p class="mt-6 text-base text-gray-600">Step up your designs and workflow with
+                                    integrations with your favourite tools such as mailchimp, slack, jira etc</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-white shadow-md rounded-xl">
+                        <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="13" y="14" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <rect x="7" y="11" width="2" height="6" rx="1" fill="#111827"></rect>
+                                <rect x="11" y="13" width="2" height="6" rx="1" transform="rotate(90 11 13)"
+                                    fill="#111827">
+                                </rect>
+                                <rect x="16" y="12" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <path
+                                    d="M14 8V8C14 7.58326 14 7.37488 13.9655 7.19144C13.8455 6.5546 13.4245 6.01534 12.8358 5.74455C12.6662 5.66654 12.464 5.616 12.0597 5.51493L12 5.5C11.5388 5.3847 11.3082 5.32706 11.1171 5.233C10.5686 4.96315 10.1737 4.45731 10.0449 3.85979C10 3.65151 10 3.41382 10 2.93845V2"
+                                    stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
+                                <path
+                                    d="M3 14C3 11.4412 3 10.1618 3.61994 9.28042C3.77954 9.05351 3.96572 8.85041 4.17372 8.6763C4.98164 8 6.15442 8 8.5 8H15.5C17.8456 8 19.0184 8 19.8263 8.6763C20.0343 8.85041 20.2205 9.05351 20.3801 9.28042C21 10.1618 21 11.4412 21 14C21 16.5588 21 17.8382 20.3801 18.7196C20.2205 18.9465 20.0343 19.1496 19.8263 19.3237C19.0184 20 17.8456 20 15.5 20H8.5C6.15442 20 4.98164 20 4.17372 19.3237C3.96572 19.1496 3.77954 18.9465 3.61994 18.7196C3 17.8382 3 16.5588 3 14Z"
+                                    stroke="#111827" stroke-width="2"></path>
+                            </svg>
+                            <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Publish webpage online</h3>
+                            <p class="mt-6 text-base text-gray-600">Effortlessly publish your webpages online and make
+                                it available to the world with a click of a button</p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-1">
+                            <div
+                                class="w-full h-full rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-yellow-400 via-pink-500 to-green-600">
+                            </div>
+                        </div>
+                        <div class="relative overflow-hidden bg-white shadow-md rounded-xl h-full">
+                            <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 8L20 8" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <path d="M4 16L14 16" stroke="#111827" stroke-width="2" stroke-linecap="round">
+                                    </path>
+                                    <ellipse cx="7" cy="8" rx="3" ry="3" transform="rotate(90 7 8)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                    <ellipse cx="17" cy="16" rx="3" ry="3" transform="rotate(90 17 16)" stroke="#111827"
+                                        stroke-width="2" stroke-linecap="round"></ellipse>
+                                </svg>
+                                <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Forms and Data Collection
+                                </h3>
+                                <p class="mt-6 text-base text-gray-600">Collect data and information from users with
+                                    forms built on windframe and sort through them in a nice interface</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-white shadow-md rounded-xl">
+                        <div class="p-9"><svg class="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="13" y="14" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <rect x="7" y="11" width="2" height="6" rx="1" fill="#111827"></rect>
+                                <rect x="11" y="13" width="2" height="6" rx="1" transform="rotate(90 11 13)"
+                                    fill="#111827">
+                                </rect>
+                                <rect x="16" y="12" width="2" height="2" rx="1" fill="#111827"></rect>
+                                <path
+                                    d="M14 8V8C14 7.58326 14 7.37488 13.9655 7.19144C13.8455 6.5546 13.4245 6.01534 12.8358 5.74455C12.6662 5.66654 12.464 5.616 12.0597 5.51493L12 5.5C11.5388 5.3847 11.3082 5.32706 11.1171 5.233C10.5686 4.96315 10.1737 4.45731 10.0449 3.85979C10 3.65151 10 3.41382 10 2.93845V2"
+                                    stroke="#111827" stroke-width="2" stroke-linecap="round"></path>
+                                <path
+                                    d="M3 14C3 11.4412 3 10.1618 3.61994 9.28042C3.77954 9.05351 3.96572 8.85041 4.17372 8.6763C4.98164 8 6.15442 8 8.5 8H15.5C17.8456 8 19.0184 8 19.8263 8.6763C20.0343 8.85041 20.2205 9.05351 20.3801 9.28042C21 10.1618 21 11.4412 21 14C21 16.5588 21 17.8382 20.3801 18.7196C20.2205 18.9465 20.0343 19.1496 19.8263 19.3237C19.0184 20 17.8456 20 15.5 20H8.5C6.15442 20 4.98164 20 4.17372 19.3237C3.96572 19.1496 3.77954 18.9465 3.61994 18.7196C3 17.8382 3 16.5588 3 14Z"
+                                    stroke="#111827" stroke-width="2"></path>
+                            </svg>
+                            <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Custom Domains</h3>
+                            <p class="mt-6 text-base text-gray-600">Attach your own custom domain to your published
+                                projects or website on windframe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--pricing- section-->
+        <section class="text-center py-12 px-4 container mx-auto">
+            <h2 class="text-2xl font-bold">Subscription And Plans</h2>
+            <p class="mt-4 text-gray-700 max-w-2xl mx-auto">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dolores provident. Vel corrupti laboriosam dolore quam ad, culpa deserunt? Atque.
+            </p>
+            <div class="max-w-screen-lg mx-auto px-2 mt-10 container">
+                <div class="flex flex-col gap-4 md:flex-row items-center justify-center">
+                    <div class="md:w-1/3 p-6 rounded-lg border">
+                        <h2 class="text-lg font-bold mb-2">Basic Plan</h2>
+                        <p class="text-gray-700 mb-4">Perfect for small teams or individuals</p>
+                        <p class="text-4xl font-bold mb-4">$10<span class="text-gray-500 text-lg">/month</span></p>
+                        <ul class="text-sm text-gray-700">
+                            <li>10GB Storage</li>
+                            <li>50GB Bandwidth</li>
+                            <li>5 Email Accounts</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                        <button
+                            class="mt-8 py-3 px-6 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-200">Get
+                            Started</button>
+                    </div>
+                    <div class="md:w-1/3 p-6 rounded-lg border">
+                        <h2 class="text-lg font-bold mb-2">Premium Plan</h2>
+                        <p class="text-gray-700 mb-4">Great for larger teams or businesses</p>
+                        <p class="text-4xl font-bold mb-4">$50<span class="text-gray-500 text-lg">/month</span></p>
+                        <ul class="text-sm text-gray-700">
+                            <li>100GB Storage</li>
+                            <li>500GB Bandwidth</li>
+                            <li>20 Email Accounts</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                        <button
+                            class="mt-8 py-3 px-6 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-200">Get
+                            Started</button>
+                    </div>
+                    <div class="md:w-1/3 p-6 rounded-lg border">
+                        <h2 class="text-lg font-bold mb-2">Enterprise Plan</h2>
+                        <p class="text-gray-700 mb-4">Custom plans for large organizations</p>
+                        <p class="text-4xl font-bold mb-4">$100<span class="text-gray-500 text-lg">/month</span></p>
+                        <ul class="text-sm text-gray-700">
+                            <li>Unlimited Storage</li>
+                            <li>Unlimited Bandwidth</li>
+                            <li>50 Email Accounts</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                        <button
+                            class="mt-8 py-3 px-6 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue transition duration-200">Get
+                            Started</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!---our team-->
+    
+<section id="our-team" class="bg-gray-100 py-20 container mx-auto">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8 text-primary">Meet Our Team</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/1.jpg" alt="Team Member 1" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">John Doe</h3>
+                <p class="text-gray-700">Role: Software Engineer</p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/4.jpg" alt="Team Member 2" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Jane Smith</h3>
+                <p class="text-gray-700">Role: Graphic Designer</p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/3.jpg" alt="Team Member 3" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Alex Johnson</h3>
+                <p class="text-gray-700">Role: Marketing Manager</p>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/2.jpg" alt="Team Member 4" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Peter Johnson</h3>
+                <p class="text-gray-700">Role: Seo specialist</p>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/5.jpg" alt="Team Member 5" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Emily Brown</h3>
+                <p class="text-gray-700">Role: UX Designer</p>
+            </div>
+
+            <!-- Team Member 6 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/6.jpg" alt="Team Member 6" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Michael Davis</h3>
+                <p class="text-gray-700">Role: Frontend Developer</p>
+            </div>
+
+            <!-- Team Member 7 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/7.jpg" alt="Team Member 7" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">Sarah Johnson</h3>
+                <p class="text-gray-700">Role: Content Writer</p>
+            </div>
+
+            <!-- Team Member 8 -->
+            <div class="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+                <img src="https://spacema-dev.com/elevate/assets/images/team/8.jpg" alt="Team Member 8" class="w-full rounded-full mb-4">
+                <h3 class="text-xl font-semibold mb-2">David Wilson</h3>
+                <p class="text-gray-700">Role: Project Manager</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--contact section-->
+<section class=" bg-yellow-100 container mx-auto" id="contact">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-15">
+        <div class="mb-4">
+            <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
+                <p class="text-base font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-200">
+                    Contact
+                </p>
+                <h2
+                    class="font-heading mb-4 font-bold tracking-tight text-gray-900 dark:text-white text-3xl sm:text-5xl">
+                    Get in Touch
+                </h2>
+                <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-600 dark:text-slate-400">In hac habitasse platea
+                    dictumst
+                </p>
+            </div>
+        </div>
+        <div class="flex items-stretch justify-center">
+            <div class="grid md:grid-cols-2">
+                <div class="h-full pr-6">
+                    <p class="mt-3 mb-12 text-lg text-gray-600 dark:text-slate-400">
+                        Class aptent taciti sociosqu ad
+                        litora torquent per conubia nostra, per inceptos himenaeos. Duis nec ipsum orci. Ut scelerisque
+                        sagittis ante, ac tincidunt sem venenatis ut.
+                    </p>
+                    <ul class="mb-6 md:mb-0">
+                        <li class="flex">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-6 w-6">
+                                    <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                                    <path
+                                        d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="ml-4 mb-4">
+                                <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">Our Address
+                                </h3>
+                                <p class="text-gray-600 dark:text-slate-400">Law garden </p>
+                                <p class="text-gray-600 dark:text-slate-400">Ahemdabad,Gujarat</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-6 w-6">
+                                    <path
+                                        d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2">
+                                    </path>
+                                    <path d="M15 7a2 2 0 0 1 2 2"></path>
+                                    <path d="M15 3a6 6 0 0 1 6 6"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4 mb-4">
+                                <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">Contact
+                                </h3>
+                                <p class="text-gray-600 dark:text-slate-400">Mobile: +9146555549 </p>
+                                <p class="text-gray-600 dark:text-slate-400">Mail: example@gmail.com</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-6 w-6">
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                    <path d="M12 7v5l3 3"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4 mb-4">
+                                <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-white">Working
+                                    hours</h3>
+                                <p class="text-gray-600 dark:text-slate-400">Monday - Friday: 08:00 - 17:00</p>
+                                <p class="text-gray-600 dark:text-slate-400">Saturday &amp; Sunday: 08:00 - 12:00</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card h-fit max-w-6xl p-5 md:p-12" id="form">
+                    <h2 class="mb-4 text-2xl font-bold dark:text-white">Ready to Get Started?</h2>
+                    <form id="contactForm">
+                        <div class="mb-6">
+                            <div class="mx-0 mb-1 sm:mb-4">
+                                <div class="mx-0 mb-1 sm:mb-4">
+                                    <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input type="text" id="name" autocomplete="given-name" placeholder="Your name" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="name">
+                                </div>
+                                <div class="mx-0 mb-1 sm:mb-4">
+                                    <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input type="email" id="email" autocomplete="email" placeholder="Your email address" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="email">
+                                </div>
+                            </div>
+                            <div class="mx-0 mb-1 sm:mb-4">
+                                <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label><textarea id="textarea" name="textarea" cols="30" rows="5" placeholder="Write your message..." class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"></textarea>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- CTA Section -->
+    <div class="bg-primary-500 container mx-auto mt-10">
+        
+            <h2 class="text-3xl font-extrabold text-black sm:text-4xl">
+                <span class="block">Ready to dive in?</span>
+                <span class="block">Start your free trial today.</span>
+            </h2>
+            <p class="mt-4 text-lg leading-6 text-primary-100">
+                Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla nec.
+            </p>
+           <div class="grid grid-cols-1 gap-5 sm:grid-cols-4 mt-4">
+            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+                <div class="px-4 py-5 sm:p-6">
+                    <dl>
+                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">Total free
+                            servers</dt>
+                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400">1.6M</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+                <div class="px-4 py-5 sm:p-6">
+                    <dl>
+                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">Servers a
+                            month</dt>
+                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400">19.2K
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+                <div class="px-4 py-5 sm:p-6">
+                    <dl>
+                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">Servers a
+                            week</dt>
+                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400">4.9K</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow sm:rounded-lg dark:bg-gray-900">
+                <div class="px-4 py-5 sm:p-6">
+                    <dl>
+                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate dark:text-gray-400">Total users
+                        </dt>
+                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600 dark:text-indigo-400">166.7K
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 mt-10 container mx-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div class="space-y-8 xl:col-span-1">
+                    <div class="flex items-center">
+                       
+                        <span class="ml-2 text-xl font-semibold text-white">VERSION.IO</span>
+                    </div>
+                    <p class="text-gray-300 text-base">
+                        Making the world a better place through constructing elegant hierarchies.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">GitHub</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Solutions</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Marketing</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Analytics</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Commerce</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Insights</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Pricing</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Documentation</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Guides</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">API Status</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">About</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Jobs</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Press</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Claim</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Privacy</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-400 hover:text-white">Terms</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; 2025 VERSION.IO . All rights reserved krishrawal...
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    </body>
+
+</html>
